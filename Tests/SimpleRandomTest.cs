@@ -25,5 +25,13 @@ namespace Tests
         {
             int[] newArray = RandomizeArray.Do(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 });
         }
+
+        [TestMethod]
+        public void TwoDiceSimulatorTest()
+        {
+            int value = TwoDiceSimulator.Do();
+            Assert.IsTrue(value >= 2);
+            Assert.IsTrue(value <= 12);
+        }
     }
 }
