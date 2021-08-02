@@ -32,5 +32,31 @@ namespace Tests
 
             CollectionAssert.AreEqual(primes, FindPrimeNumbers.Do(199));
         }
+
+        [TestMethod]
+        public void PrimeFrom83to109()
+        {
+            Assert.IsTrue(IsPrime.Do(83));
+            Assert.IsTrue(IsPrime.Do(89));
+            Assert.IsTrue(IsPrime.Do(97));
+            Assert.IsTrue(IsPrime.Do(101));
+            Assert.IsTrue(IsPrime.Do(103));
+            Assert.IsTrue(IsPrime.Do(107));
+            Assert.IsTrue(IsPrime.Do(109));
+        }
+
+        [TestMethod]
+        public void NotPrimeFrom80to90()
+        {
+            Assert.IsFalse(IsPrime.Do(80));
+            Assert.IsFalse(IsPrime.Do(81));
+            Assert.IsFalse(IsPrime.Do(82));
+            Assert.IsFalse(IsPrime.Do(84));
+            Assert.IsFalse(IsPrime.Do(85));
+            Assert.IsFalse(IsPrime.Do(86));
+            Assert.IsFalse(IsPrime.Do(88));
+            Assert.IsFalse(IsPrime.Do(90));
+
+        }
     }
 }
