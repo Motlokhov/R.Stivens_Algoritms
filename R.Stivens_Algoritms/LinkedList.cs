@@ -52,6 +52,18 @@ namespace R.Stivens_Algoritms
             return null;
         }
 
+        public LinkedListNode FindFrom(LinkedListNode node, int target)
+        {
+            LinkedListNode current = node.Next;
+            while(current != null)
+            {
+                if(current.Value == target)
+                    return current;
+                current = current.Next;
+            }
+            return null;
+        }
+
         public LinkedListNode FindNodeBefore(int value)
         {
             LinkedListNode current = head;
