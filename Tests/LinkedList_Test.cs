@@ -13,22 +13,40 @@ namespace Tests
 
         public LinkedList_Test()
         {
-            sut.AddAtTop(2);
-            sut.AddAtTop(1);
+            sut.AddAfter(0, 3);
+            sut.AddAfter(3, 8);
         }
 
         [TestMethod]
-        public void FindItemsTest()
+        public void FindHeadTest()
         {
-            Assert.AreEqual(1, sut.Find(1).Value);
-            Assert.AreEqual(0, sut.Find(0).Value);
-            Assert.IsNull(sut.Find(-1));
+            LinkedListNode head = sut.Find(0);
+            Assert.AreSame(null, head.Preveous);
+            Assert.AreEqual(0, head.Value);
+            Assert.AreEqual(3, head.Next.Value);
+        }
+
+        [TestMethod]
+        public void FindValueTest()
+        {
+            LinkedListNode node = sut.Find(3);
+            Assert.AreEqual(3, node.Value);
+            Assert.AreEqual(8, node.Next.Value);
+            Assert.AreEqual(0, node.Preveous.Value);
+        }
+        [TestMethod]
+        public void FindTailTest()
+        {
+            LinkedListNode tail = sut.FindFrom(sut.Find(0),0);
+            Assert.AreEqual(0, tail.Value);
+            Assert.AreEqual(8, tail.Preveous.Value);
+            Assert.AreEqual(null, tail.Next);
         }
 
         [TestMethod]
         public void ActionIterateTest()
         {
-            sut.ActionIterate((value) => Trace.Write($"Value:{value} {Environment.NewLine}"));
+            LinkedList.ActionIterate((value) => Trace.Write($"Value:{value} {Environment.NewLine}"), sut.Find(0));
         }
 
         [TestMethod]
