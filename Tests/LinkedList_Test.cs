@@ -2,16 +2,16 @@
 using R.Stivens_Algoritms;
 using System;
 using System.Diagnostics;
-using static R.Stivens_Algoritms.OneWayLinkedList;
+using static R.Stivens_Algoritms.LinkedList;
 
 namespace Tests
 {
     [TestClass]
-    public class OneWayLinkedList_Test
+    public class LinkedList_Test
     {
-        readonly OneWayLinkedList sut = new();
+        readonly LinkedList sut = new();
 
-        public OneWayLinkedList_Test()
+        public LinkedList_Test()
         {
             sut.AddAtTop(2);
             sut.AddAtTop(1);
@@ -35,7 +35,7 @@ namespace Tests
         public void AddAtEndTest()
         {
             sut.AddAtEnd(3);
-            OneWayLinkedListNode node = sut.Find(0);
+            LinkedListNode node = sut.Find(0);
 
             Assert.AreEqual(3, node.Next.Value);
         }
@@ -44,7 +44,7 @@ namespace Tests
         public void AddAfterTest()
         {
             sut.AddAfter(0,3);
-            OneWayLinkedListNode node = sut.Find(0);
+            LinkedListNode node = sut.Find(0);
 
             Assert.AreEqual(3, node.Next.Value);
         }
