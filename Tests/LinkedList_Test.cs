@@ -13,6 +13,7 @@ namespace Tests
 
         public LinkedList_Test()
         {
+            sut.AddFirst(0);
             sut.AddAfter(0, 3);
             sut.AddAfter(3, 8);
         }
@@ -21,7 +22,7 @@ namespace Tests
         public void FindHeadTest()
         {
             LinkedListNode head = sut.Find(0);
-            Assert.AreSame(null, head.Preveous);
+            Assert.AreSame(null, head.Previous);
             Assert.AreEqual(0, head.Value);
             Assert.AreEqual(3, head.Next.Value);
         }
@@ -32,39 +33,52 @@ namespace Tests
             LinkedListNode node = sut.Find(3);
             Assert.AreEqual(3, node.Value);
             Assert.AreEqual(8, node.Next.Value);
-            Assert.AreEqual(0, node.Preveous.Value);
+            Assert.AreEqual(0, node.Previous.Value);
         }
         [TestMethod]
         public void FindTailTest()
         {
-            LinkedListNode tail = sut.FindFrom(sut.Find(0),0);
-            Assert.AreEqual(0, tail.Value);
-            Assert.AreEqual(8, tail.Preveous.Value);
-            Assert.AreEqual(null, tail.Next);
+            LinkedListNode tail = sut.Find(8);
+            Assert.AreEqual(8, tail.Value);
+            Assert.AreEqual(3, tail.Previous.Value);
+            Assert.AreSame(null, tail.Next);
         }
 
         [TestMethod]
-        public void ActionIterateTest()
+        public void FindBeforeTest()
         {
-            LinkedList.ActionIterate((value) => Trace.Write($"Value:{value} {Environment.NewLine}"), sut.Find(0));
+            Assert.AreEqual(3, sut.FindBefore(8).Value);
+        }
+
+        [TestMethod]
+        public void AddAtTopTest()
+        {
+            sut.AddFirst(10);
+            LinkedListNode node = sut.Find(10);
+            Assert.AreEqual(10, node.Value);
+            Assert.AreEqual(0, node.Next.Value);
+            Assert.AreEqual(null, node.Previous);
         }
 
         [TestMethod]
         public void AddAtEndTest()
         {
-            sut.AddAtEnd(3);
-            LinkedListNode node = sut.Find(0);
-
-            Assert.AreEqual(3, node.Next.Value);
+            sut.AddLast(20);
+            LinkedListNode node = sut.Find(20);
+            Assert.AreEqual(20, node.Value);
+            Assert.AreEqual(8, node.Previous.Value);
+            Assert.AreEqual(null, node.Next);
         }
 
         [TestMethod]
-        public void AddAfterTest()
+        public void AddBeforeTest()
         {
-            sut.AddAfter(0,3);
-            LinkedListNode node = sut.Find(0);
+            sut.AddBefore(8,30);
+            LinkedListNode node = sut.Find(30);
 
-            Assert.AreEqual(3, node.Next.Value);
+            Assert.AreEqual(30, node.Value);
+            Assert.AreEqual(8, node.Next.Value);
+            Assert.AreEqual(3, node.Previous.Value);
         }
     }
 }
