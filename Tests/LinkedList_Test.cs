@@ -80,5 +80,22 @@ namespace Tests
             Assert.AreEqual(8, node.Next.Value);
             Assert.AreEqual(3, node.Previous.Value);
         }
+
+        [TestMethod]
+        public void CopyTest()
+        {
+            LinkedList ll = new LinkedList();
+            sut.Copy(ll);
+            LinkedListNode index0 = sut.Find(0);
+            LinkedListNode index1 = sut.Find(3);
+            LinkedListNode index2 = sut.Find(8);
+
+            Assert.IsTrue(index0._previous.Equals(index2));
+            Assert.IsTrue(index0.Equals(index1.Previous));
+            Assert.IsTrue(index0.Next.Equals(index1));
+            Assert.IsTrue(index1.Equals(index2.Previous));
+            Assert.IsTrue(index1.Next.Equals(index2));
+            Assert.IsTrue(index2._next.Equals(index0));
+        }
     }
 }

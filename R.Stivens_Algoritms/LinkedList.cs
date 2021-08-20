@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Tests")]
 namespace R.Stivens_Algoritms
 {
     //Реализация с через кольцевую структуру.
@@ -14,9 +16,15 @@ namespace R.Stivens_Algoritms
             internal LinkedListNode _previous;
             internal LinkedList _list;
 
-            public LinkedListNode(int value)
+            internal LinkedListNode(int value)
             {
                 _value = value;
+            }
+
+            internal LinkedListNode(int value, LinkedList list)
+            {
+                _value = value;
+                _list = list;
             }
 
             public int Value { get => _value;}
@@ -122,6 +130,27 @@ namespace R.Stivens_Algoritms
             if(node == head)
                 head = newNode;
             newNode._list = this;
+        }
+
+        public void Copy(in LinkedList list)
+        {
+            LinkedListNode oldNode = head;
+            LinkedListNode newHead = new(oldNode.Value, list);
+            LinkedListNode lastAddedNode = newHead;
+
+            do
+            {
+                lastAddedNode._next = new LinkedListNode(oldNode._next.Value, list);
+                LinkedListNode previous = lastAddedNode;
+                lastAddedNode = lastAddedNode._next;
+                lastAddedNode._previous = previous;
+
+                oldNode = oldNode._next;
+            } while(oldNode._next != head);
+
+            lastAddedNode._next = newHead;
+            newHead._previous = lastAddedNode;
+            list.head = newHead;
         }
 
         private void InsertNodeToEmptyList(LinkedListNode node)
