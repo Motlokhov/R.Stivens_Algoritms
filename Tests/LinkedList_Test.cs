@@ -97,5 +97,34 @@ namespace Tests
             Assert.IsTrue(index1.Next.Equals(index2));
             Assert.IsTrue(index2._next.Equals(index0));
         }
+
+        [TestMethod]
+        public void InsertSortTest()
+        {
+            sut.AddFirst(10);
+            sut.AddFirst(3);
+
+            LinkedList sorted = new();
+            sut.InsertionSortIn(sorted);
+
+            LinkedListNode first = sorted.Find(0);
+            Assert.AreEqual(null, first.Previous);
+            Assert.AreEqual(0, first.Value);
+            Assert.AreEqual(3, first.Next.Value);
+            Assert.AreEqual(3, first.Next.Next.Value);
+            Assert.AreEqual(8, first.Next.Next.Next.Value);
+
+            LinkedListNode last = first.Next.Next.Next.Next;
+            
+            Assert.AreEqual(null,last.Next);
+            Assert.AreEqual(10, last.Value);
+            Assert.AreEqual(8, last.Previous.Value);
+            Assert.AreEqual(3, last.Previous.Previous.Value);
+            Assert.AreEqual(3, last.Previous.Previous.Previous.Value);
+            Assert.AreEqual(0, last.Previous.Previous.Previous.Previous.Value);
+
+            Assert.AreEqual(last._next, first);
+            Assert.AreEqual(first._previous, last);
+        }
     }
 }

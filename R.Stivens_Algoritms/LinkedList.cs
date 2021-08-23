@@ -153,6 +153,54 @@ namespace R.Stivens_Algoritms
             list.head = newHead;
         }
 
+        public void InsertionSortIn(LinkedList list)
+        {
+            LinkedListNode currentNewNode = new(head.Value, list);
+
+            LinkedListNode newHead = currentNewNode;
+            LinkedListNode newTail = currentNewNode;
+            LinkedListNode currentOldNode = head._next;
+            
+
+            while(currentOldNode != head)
+            {
+                LinkedListNode newNode = new(currentOldNode.Value, list);
+                currentNewNode = newHead;
+
+                if(newNode.Value < newHead.Value)
+                {
+                    newNode._next = newHead;
+                    newHead._previous = newNode;
+                    newHead = newNode;
+                }
+                else
+                {
+                    while(currentNewNode._next is not null && newNode.Value > currentNewNode._next.Value)
+                        currentNewNode = currentNewNode._next;
+
+                    if(currentNewNode._next is null)
+                    {
+                        currentNewNode._next = newNode;
+                        newNode._previous = currentNewNode;
+                        newTail = newNode;
+                    }
+                    else
+                    {
+                        currentNewNode._next._previous = newNode;
+                        newNode._next = currentNewNode._next;
+                        newNode._previous = currentNewNode;
+                        currentNewNode._next = newNode;
+                    }
+                }
+                
+                currentOldNode = currentOldNode._next;
+            }
+
+            newTail._next = newHead;
+            newHead._previous = newTail;
+            list.head = newHead;
+        }
+
         private void InsertNodeToEmptyList(LinkedListNode node)
         {
             node._previous = node;
