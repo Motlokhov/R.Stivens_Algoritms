@@ -60,5 +60,13 @@ namespace Tests
             Assert.IsTrue(LinkedNode.HasLoopUsingHashTable(loopNodeThroughtCenter));
             Assert.IsFalse(LinkedNode.HasLoopUsingHashTable(unloopNode));
         }
+
+        [TestMethod]
+        public void IsLoopedTracing_Test()
+        {
+            Assert.IsTrue(LinkedNode.HasLoopUsingTracing(loopNodeThroughtCenter));
+            Assert.IsTrue(LinkedNode.HasLoopUsingTracing(loopNode));
+            Assert.IsFalse(LinkedNode.HasLoopUsingTracing(unloopNode));
+        }
     }
 }

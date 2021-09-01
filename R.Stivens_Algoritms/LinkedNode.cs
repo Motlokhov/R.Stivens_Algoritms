@@ -22,5 +22,22 @@ namespace R.Stivens_Algoritms
 
             return false;
         }
+
+        public static bool HasLoopUsingTracing(LinkedNode sentinel)
+        {
+            LinkedNode cell = sentinel;
+            while(cell.Next != null && cell.Next != sentinel)
+            {
+                LinkedNode tracer = sentinel;
+                while(tracer != cell)
+                {
+                    if(tracer.Next == cell.Next)
+                        return true;
+                    tracer = tracer.Next;
+                }
+                cell = cell.Next;
+            }
+            return cell.Next == sentinel;
+        }
     }
 }
