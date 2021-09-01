@@ -68,5 +68,13 @@ namespace Tests
             Assert.IsTrue(LinkedNode.HasLoopUsingTracing(loopNode));
             Assert.IsFalse(LinkedNode.HasLoopUsingTracing(unloopNode));
         }
+
+        [TestMethod]
+        public void IsLoopedTortoiseAndRabbit()
+        {
+            Assert.IsTrue(LinkedNode.HasLoopUsingRabbitAndTortoiseAlgorithm(loopNode));
+            Assert.IsTrue(LinkedNode.HasLoopUsingRabbitAndTortoiseAlgorithm(loopNodeThroughtCenter));
+            Assert.IsFalse(LinkedNode.HasLoopUsingRabbitAndTortoiseAlgorithm(unloopNode));
+        }
     }
 }

@@ -39,5 +39,20 @@ namespace R.Stivens_Algoritms
             }
             return cell.Next == sentinel;
         }
+
+        public static bool HasLoopUsingRabbitAndTortoiseAlgorithm(LinkedNode sentinel)
+        {
+            LinkedNode rabbit = sentinel;
+            LinkedNode tortoise = sentinel;
+            do
+            {
+                if(rabbit.Next == null)
+                    return false;
+                rabbit = rabbit.Next.Next;
+                tortoise = tortoise.Next;
+            } while(rabbit != null && rabbit != tortoise);
+
+            return rabbit == tortoise;
+        }
     }
 }
