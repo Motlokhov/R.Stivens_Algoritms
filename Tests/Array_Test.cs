@@ -10,7 +10,7 @@ namespace Tests
         [TestMethod]
         public void TriangleArrayTest()
         {
-            TriangleArray triangleArray = new(3);
+            SymmetricTriangleArray triangleArray = new(3);
             triangleArray[0, 0] = 100;
             triangleArray[1, 1] = 102;
             triangleArray[2, 2] = 104;

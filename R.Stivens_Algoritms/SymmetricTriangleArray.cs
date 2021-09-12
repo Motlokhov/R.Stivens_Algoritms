@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace R.Stivens_Algoritms
 {
-    class TriangleArray
+    class SymmetricTriangleArray
     {
         int[][] _array;
 
-        public TriangleArray(int n = 1)
+        public SymmetricTriangleArray(int n = 1)
         {
             _array = new int[n][];
 
