@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace R.Stivens_Algoritms
 {
+    /// <summary>
+    /// Симметричный треугольный массив.
+    /// Имеет смысл если (row,col) == (col,row).
+    /// Пример:
+    /// Город 1 связан с городом 2. И если путь от города 1 до города 2 и обратно эквивалентен.
+    /// </summary>
     class SymmetricTriangleArray
     {
         int[][] _array;
