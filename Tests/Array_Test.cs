@@ -27,5 +27,20 @@ namespace Tests
 
             Assert.ThrowsException<ArgumentException>(() => triangleArray[3, 3]);
         }
+
+        [TestMethod]
+        public void BreakArrayTest()
+        {
+            BreakArray breakArray = new();
+            breakArray.SetValue(0, 1, "NewValue");
+
+            bool isFound = breakArray.TryGetValue(0, 1, out string expected);
+            Assert.IsTrue(isFound);
+            Assert.AreEqual(expected, "NewValue");
+
+            isFound = breakArray.TryGetValue(1, 0, out string val);
+            Assert.IsFalse(isFound);
+            Assert.IsNull(val);
+        }
     }
 }
