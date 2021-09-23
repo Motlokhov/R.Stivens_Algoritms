@@ -43,5 +43,14 @@ namespace Tests
                 Assert.AreEqual("exception", doubleStack.PopRight());
             });
         }
+
+        [TestMethod]
+        public void ReverceArrayWithStack_Test()
+        {
+            char[] word = new char[] { 'w', 'o', 'r', 'd' };
+            char[] result = ReverceArrayWithStack.Do(word);
+
+            CollectionAssert.AreEqual(new char[4] { 'd', 'r', 'o', 'w' }, result);
+        }
     }
 }
