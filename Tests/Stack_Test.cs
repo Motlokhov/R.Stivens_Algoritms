@@ -69,5 +69,21 @@ namespace Tests
             Assert.IsFalse(result.TryPeek(out _));
 
         }
+
+        [TestMethod]
+        public void StackSelectionSort_Test()
+        {
+            Stack<int> stack = new Stack<int>(new int[] { 10, 5, 6, 4, 5, 16, 15 });
+            Stack<int> result = StackSelectionSort.Do(stack);
+
+            Assert.AreEqual(16, result.Pop());
+            Assert.AreEqual(15, result.Pop());
+            Assert.AreEqual(10, result.Pop());
+            Assert.AreEqual(6, result.Pop());
+            Assert.AreEqual(5, result.Pop());
+            Assert.AreEqual(5, result.Pop());
+            Assert.AreEqual(4, result.Pop());
+            Assert.IsFalse(result.TryPeek(out _));
+        }
     }
 }
