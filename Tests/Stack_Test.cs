@@ -52,5 +52,22 @@ namespace Tests
 
             CollectionAssert.AreEqual(new char[4] { 'd', 'r', 'o', 'w' }, result);
         }
+
+        [TestMethod]
+        public void StackInsertionSort_Test()
+        {
+            Stack<int> stack = new Stack<int>(new int[] { 10,5,6,4,5,16,15});
+            Stack<int> result = Stackinsertionsort.Do(stack);
+
+            Assert.AreEqual(4, result.Pop());
+            Assert.AreEqual(5, result.Pop());
+            Assert.AreEqual(5, result.Pop());
+            Assert.AreEqual(6, result.Pop());
+            Assert.AreEqual(10, result.Pop());
+            Assert.AreEqual(15, result.Pop());
+            Assert.AreEqual(16, result.Pop());
+            Assert.IsFalse(result.TryPeek(out _));
+
+        }
     }
 }
