@@ -68,5 +68,31 @@ namespace R.Stivens_Algoritms
                 Swap(ref array[newIndex], ref array[currentIndex]);
             }
         }
+
+        public static void BubbleSort(this int[] array, bool asc = true)
+        {
+            if (!IsArrayValid(array))
+            {
+                return;
+            }
+
+            Func<int, int, bool> sortStrategy = SortStrategy(asc);
+
+            bool notSorted;
+
+            do
+            {
+                notSorted = false;
+                for (int index = 1; index < array.Length; index++)
+                {
+                    int previousIndex = index - 1;
+                    if (sortStrategy(array[index], array[previousIndex]))
+                    {
+                        Swap(ref array[index], ref array[previousIndex]);
+                        notSorted = true;
+                    }
+                }
+            } while (notSorted);
+        }
     }
 }

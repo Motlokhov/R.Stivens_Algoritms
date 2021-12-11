@@ -41,5 +41,22 @@ namespace Tests
 
             CollectionAssert.AreEqual(new[] { 10, 5, 4, 3, 3, 2, 1, 1 }, array);
         }
+
+        [TestMethod]
+        public void BubbleSorAscTest()
+        {
+            int[] array = new[] { 10, 2, 1, 5, 3, 4, 1, 3 };
+            array.BubbleSort();
+
+            CollectionAssert.AreEqual(new[] { 1, 1, 2, 3, 3, 4, 5, 10 }, array);
+        }
+
+        public void BubbleSortDescTest()
+        {
+            int[] array = new[] { 10, 2, 1, 5, 3, 4, 1, 3 };
+            array.BubbleSort(false);
+
+            CollectionAssert.AreEqual(new[] { 10, 5, 4, 3, 3, 2, 1, 1 }, array);
+        }
     }
 }
