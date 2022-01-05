@@ -78,21 +78,21 @@ namespace R.Stivens_Algoritms
 
             Func<int, int, bool> sortStrategy = SortStrategy(asc);
 
-            bool notSorted;
+            bool sorted;
 
             do
             {
-                notSorted = false;
+                sorted = true;
                 for (int index = 1; index < array.Length; index++)
                 {
                     int previousIndex = index - 1;
                     if (sortStrategy(array[index], array[previousIndex]))
                     {
                         Swap(ref array[index], ref array[previousIndex]);
-                        notSorted = true;
+                        sorted = false;
                     }
                 }
-            } while (notSorted);
+            } while (!sorted);
         }
     }
 }
