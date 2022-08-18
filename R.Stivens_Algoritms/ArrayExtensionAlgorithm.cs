@@ -13,7 +13,7 @@ namespace R.Stivens_Algoritms
 
         private static bool IsArrayValid(int[] array)
         {
-            return array != null && array.Length > 2;
+            return array != null;
         }
 
         private static bool AscSort(int @new, int sorted) => @new < sorted;

@@ -16,6 +16,15 @@ namespace Tests
         }
 
         [TestMethod]
+        public void InsertionSortTwoValuesSort()
+        {
+            int[] array = new[] { 10, 1 };
+            array.InsertionSort();
+
+            CollectionAssert.AreEqual(new[] { 1, 10 }, array);
+        }
+
+        [TestMethod]
         public void InsertionSortDescTest()
         {
             int[] array = new[] { 10, 2, 1, 5, 3, 4, 1, 3 };
