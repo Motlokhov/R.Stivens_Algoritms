@@ -2,6 +2,9 @@
 
 namespace R.Stivens_Algoritms
 {
+    /// <summary>
+    /// Примечание: делать кучу на объектах сложно из-за поддержания правильной ссылочной структуры при перерасчете родитель\потомок.
+    /// </summary>
     internal class HeapAsArray
     {
         /// <summary>
