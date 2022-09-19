@@ -7,72 +7,80 @@ namespace R.Stivens_Algoritms
     /// </summary>
     internal class HeapAsArray
     {
+        public int[] Array { get; private set; } = new int[1];
+
+        public void AddValue(int value)
+        {
+            if (TryAddValue(value))
+            {
+                return;
+            }
+
+            int[] newArray = Expand();
+
+            newArray[Array.Length] = value;
+            System.Array.Clear(Array, 0, Array.Length);
+
+            Array = newArray;
+            Sort();
+        }
+
+        public void RemoveTop()
+        {
+            Array[0] = 0;
+            Sort();
+        }
+
         /// <summary>
         /// Сортирует массив представляя в виде структуры куча(heap), где каждый дочерний элемент меньше или равен родительскому.
         /// </summary>
-        /// <param name="array"></param>
-        public static void SortArrayToHeapStructure(int[] array)
+        private void Sort()
         {
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < Array.Length; i++)
             {
                 int currentIndex = i;
                 while (currentIndex != 0)
                 {
                     int parentIndex = (currentIndex - 1) / 2;
-                    int currentValue = array[currentIndex];
-                    int parrentValue = array[parentIndex];
+                    int currentValue = Array[currentIndex];
+                    int parrentValue = Array[parentIndex];
 
                     if (currentValue <= parrentValue)
                     {
                         break;
                     }
 
-                    Swap(ref array[currentIndex],ref array[parentIndex]);
+                    Swap(ref Array[currentIndex], ref Array[parentIndex]);
                     currentIndex = parentIndex;
                 }
             }
         }
 
-        public static void RemoveTop(int[] array)
+        private bool TryAddValue(int value)
         {
-            int result = array[0];
-            array[0] = -1;
-
-            int index = 0;
-            while (true)
+            bool result = false;
+            for (int i = 0; i < Array.Length; i++)
             {
-                int childIndex1 = index * 2 + 1;
-                int childIndex2 = index * 2 + 2;
-
-                if (childIndex1 > array.Length)
+                if (Array[i] == 0)
                 {
-                    childIndex1 = index;
-                    childIndex2 = index;
-                }
-                else if(childIndex2 > array.Length)
-                {
-                    childIndex2 = index;
-                }
-
-
-                if (array[childIndex1] <= array[index] && array[childIndex2] <= array[index])
-                {
+                    Array[i] = value;
+                    result = true;
                     break;
                 }
-
-                int swapIndex;
-                if (array[childIndex1] > array[childIndex2])
-                {
-                    swapIndex = childIndex1;
-                }
-                else
-                {
-                    swapIndex = childIndex2;
-                }
-
-                Swap(ref array[index],ref array[swapIndex]);
-                index = swapIndex;
             }
+
+            Sort();
+            return result;
+        }
+
+        private int[] Expand()
+        {
+            int log = Math.Max(Convert.ToInt32(Math.Log2(Array.Length)), 1);
+            int newCount = Convert.ToInt32(Math.Pow(2, log));
+
+            int[] newArray = new int[Array.Length + newCount];
+            System.Array.Copy(Array, newArray, Array.Length);
+            return newArray;
         }
 
         private static void Swap(ref int left, ref int right)
