@@ -17,42 +17,70 @@ namespace R.Stivens_Algoritms
             }
 
             int[] newArray = Expand();
-
-            newArray[Array.Length] = value;
-            System.Array.Clear(Array, 0, Array.Length);
+            int insertionIndex = Array.Length;
+            newArray[insertionIndex] = value;
 
             Array = newArray;
-            Sort();
+            SiftUp(insertionIndex);
         }
 
         public void RemoveTop()
         {
             Array[0] = 0;
-            Sort();
+            SiftDown();
         }
 
         /// <summary>
-        /// Сортирует массив представляя в виде структуры куча(heap), где каждый дочерний элемент меньше или равен родительскому.
+        /// Двигает элемент вниз по правилам структуры (max - heap).
         /// </summary>
-        private void Sort()
+        private void SiftDown()
         {
-            for (int i = 0; i < Array.Length; i++)
+            int parentIndex = 0;
+            while (true)
             {
-                int currentIndex = i;
-                while (currentIndex != 0)
+                int leftIndex = parentIndex * 2 + 1;
+                int rightIndex = parentIndex * 2 + 2;
+
+                if (Array.Length <= rightIndex)
                 {
-                    int parentIndex = (currentIndex - 1) / 2;
-                    int currentValue = Array[currentIndex];
-                    int parrentValue = Array[parentIndex];
-
-                    if (currentValue <= parrentValue)
-                    {
-                        break;
-                    }
-
-                    Swap(ref Array[currentIndex], ref Array[parentIndex]);
-                    currentIndex = parentIndex;
+                    break;
                 }
+
+                int childIndex = leftIndex;
+
+                if (Array[rightIndex] > Array[leftIndex])
+                {
+                    childIndex = rightIndex;
+                }
+
+                if (Array[childIndex] > Array[parentIndex])
+                {
+                    Swap(ref Array[childIndex], ref Array[parentIndex]);
+                    parentIndex = childIndex;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Двигает элемент вверх по правилам структуры (max - heap)
+        /// </summary>
+        /// <param name="childIndex"></param>
+        private void SiftUp(int childIndex)
+        {
+            if (childIndex == 0)
+            {
+                return;
+            }
+
+            int parentIndex = ParentIndex(childIndex);
+            if (Array[childIndex] > Array[parentIndex])
+            {
+                Swap(ref Array[childIndex], ref Array[parentIndex]);
+                SiftUp(parentIndex);
             }
         }
 
@@ -65,22 +93,29 @@ namespace R.Stivens_Algoritms
                 {
                     Array[i] = value;
                     result = true;
+                    SiftUp(i);
                     break;
                 }
             }
 
-            Sort();
             return result;
         }
 
         private int[] Expand()
         {
-            int log = Math.Max(Convert.ToInt32(Math.Log2(Array.Length)), 1);
+            int log = Math.Max(Height, 1);
             int newCount = Convert.ToInt32(Math.Pow(2, log));
 
             int[] newArray = new int[Array.Length + newCount];
             System.Array.Copy(Array, newArray, Array.Length);
             return newArray;
+        }
+
+        private int Height => Convert.ToInt32(Math.Log2(Array.Length));
+
+        private static int ParentIndex(int childIndex)
+        {
+            return (childIndex - 1) / 2;
         }
 
         private static void Swap(ref int left, ref int right)
